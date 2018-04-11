@@ -2,7 +2,6 @@ import math
 import matplotlib.pyplot as plt
 import sys
 
-
 class StackNode:
     def __init__(self):
         self.data=None
@@ -145,6 +144,7 @@ class Solution:
         y=temp
 
     def ConvexHull(self,points,n):
+        global discardednodes
         #iam using duplicate list in case not to change points list
 
         duplicate=[]
@@ -209,7 +209,7 @@ class Solution:
         stack.push(dup[2])
         for i in range(3,len(dup)):
             while self.orientation(stack.nextToTop(stack),stack.top(),dup[i])!=2:
-                stack.pop()
+                nodegot = stack.pop()
             stack.push(dup[i])
         lis=[]
         while not stack.isEmpty():
@@ -407,6 +407,7 @@ class Solution:
                         pass
 
     def printhull(self, morethanonehullcreated,number):
+        global discardednodes
         totallist = list()
         for i in range(len(morethanonehullcreated)):
             Xcoord = list()
@@ -429,11 +430,11 @@ class Solution:
                     nodeforedgelist = edgelistnode(temp[j], temp[0])
                     nodeforedgelist.weight = self.distance(temp[j], temp[0])
                 self.edgelist.append(nodeforedgelist)
-            plt.fill(Xcoord, Ycoord)
+            plt.fill(Xcoord, Ycoord,c='grey')
             plt.scatter(Xcoord, Ycoord, c='black')
 
         print("Enter the source and the sink vertex and be carefull that the vertex should be outside the polygon (space separated 4 integers)")
-        x1, y1, x2, y2 = map(int, input().split())
+        x1, y1, x2, y2 = map(float, input().split())
         source = Point(x1, y1)
         source.id=0
         sink = Point(x2, y2)
@@ -483,14 +484,25 @@ def main():
         n=int(input())
         print("Enter points")
         idofpoint=totalnumberofpoints+1
+        discardednodes=list()
         for i in range(n):
-            x,y=map(float,input().split(" "))
+            x,y=map(float,input().split(","))
             pointnode=Point(x,y)
             pointnode.id=idofpoint+i
+            discardednodes.append(pointnode)
             p.append(pointnode)
         temp = s.ConvexHull(p,n)
+        discardedx = list()
+        discardedy = list()
+        for i in range(len(discardednodes)):
+            discardedx.append(discardednodes[i].x)
+            discardedy.append(discardednodes[i].y)
+        discardedx.append(discardednodes[0].x)
+        discardedy.append(discardednodes[0].y)
+        plt.plot(discardedx, discardedy, c='yellow')
         totalnumberofpoints += n
         finallist.append(temp)
+        discardednodes=list()
         s = Solution()
     s.printhull(finallist,totalnumberofpoints)
 

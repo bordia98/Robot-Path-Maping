@@ -70,6 +70,7 @@ class Solution:
     #p is the point (Class Point )
     def __init__(self):
         self.edgelist = list()
+        self.checklist = list()
 
     #for finding the edge weight distance formula
     def distance(self,firstpoint,secondpoint):
@@ -198,7 +199,6 @@ class Solution:
                     else:
                         points.pop(i)
             i+=1
-        m=len(points)
         dup=[]
         dup.append(p0)
         for i in range(len(points)):
@@ -303,21 +303,11 @@ class Solution:
                     var = self.checkifedge(currentpolygonpoints[j],pointstocheck[k],totallist)
                     flag = 0
                     if var == False:
-                        for w in range(len(self.edgelist)):
-                            x1 = self.edgelist[w].u.x
-                            y1 = self.edgelist[w].u.y
-                            x2 = self.edgelist[w].v.x
-                            y2 = self.edgelist[w].v.y
-
-                            if (x1 == currentpolygonpoints[j].x and y1 == currentpolygonpoints[j].y and x2 ==
-                                pointstocheck[k].x and y2 == pointstocheck[k].y) or (
-                                    x2 == currentpolygonpoints[j].x and y2 == currentpolygonpoints[j].y and x1 ==
-                                    pointstocheck[k].x and y1 == pointstocheck[k].y):
-                                flag = 1
-                                break
-                        if flag == 0:
+                        if self.checklist[currentpolygonpoints[j].id][pointstocheck[k].id]==0:
+                            self.checklist[currentpolygonpoints[j].id][pointstocheck[k].id]=1
+                            self.checklist[pointstocheck[k].id][currentpolygonpoints[j].id]=1
                             tempnode = edgelistnode(currentpolygonpoints[j], pointstocheck[k])
-                            tempnode.weight=self.distance(currentpolygonpoints[j],pointstocheck[k])
+                            tempnode.weight = self.distance(currentpolygonpoints[j], pointstocheck[k])
                             self.edgelist.append(tempnode)
                     else:
                         pass
@@ -354,7 +344,7 @@ class Solution:
                     point1=totallist[i][j]
                     point2=totallist[i][0]
                 if(self.dointersect(point1,point2,vertex,checkpoint)):
-                    if self.findorientation(point1,vertex,point2)==0:
+                    if self.orientation(point1,vertex,point2)==0:
                         var = self.onsegment(point1,vertex,point2)
                         if var == True:
                             flag=1
@@ -387,21 +377,11 @@ class Solution:
                     var = self.checkifedge(currentpolygonpoints[j],pointstocheck[k],totallist)
                     flag = 0
                     if var == False:
-                        for w in range(len(self.edgelist)):
-                            x1 = self.edgelist[w].u.x
-                            y1 = self.edgelist[w].u.y
-                            x2 = self.edgelist[w].v.x
-                            y2 = self.edgelist[w].v.y
-
-                            if (x1 == currentpolygonpoints[j].x and y1 == currentpolygonpoints[j].y and x2 ==
-                                pointstocheck[k].x and y2 == pointstocheck[k].y) or (
-                                    x2 == currentpolygonpoints[j].x and y2 == currentpolygonpoints[j].y and x1 ==
-                                    pointstocheck[k].x and y1 == pointstocheck[k].y):
-                                flag = 1
-                                break
-                        if flag == 0:
+                        if self.checklist[currentpolygonpoints[j].id][pointstocheck[k].id] == 0:
+                            self.checklist[currentpolygonpoints[j].id][pointstocheck[k].id] = 1
+                            self.checklist[pointstocheck[k].id][currentpolygonpoints[j].id] = 1
                             tempnode = edgelistnode(currentpolygonpoints[j], pointstocheck[k])
-                            tempnode.weight=self.distance(currentpolygonpoints[j],pointstocheck[k])
+                            tempnode.weight = self.distance(currentpolygonpoints[j], pointstocheck[k])
                             self.edgelist.append(tempnode)
                     else:
                         pass
@@ -426,9 +406,13 @@ class Solution:
                 if j != len(temp) - 1:
                     nodeforedgelist = edgelistnode(temp[j], temp[j + 1])
                     nodeforedgelist.weight = self.distance(temp[j], temp[j + 1])
+                    self.checklist[temp[j].id][temp[j+1].id]=1
+                    self.checklist[temp[j+1].id][temp[j].id] = 1
                 else:
                     nodeforedgelist = edgelistnode(temp[j], temp[0])
                     nodeforedgelist.weight = self.distance(temp[j], temp[0])
+                    self.checklist[temp[j].id][temp[0].id] = 1
+                    self.checklist[temp[0].id][temp[j].id] = 1
                 self.edgelist.append(nodeforedgelist)
             plt.fill(Xcoord, Ycoord,c='grey')
             plt.scatter(Xcoord, Ycoord, c='black')
@@ -504,6 +488,7 @@ def main():
         finallist.append(temp)
         discardednodes=list()
         s = Solution()
+    s.checklist=[ [ 0 for i in range(totalnumberofpoints+2) ]for j in range(totalnumberofpoints+2)]
     s.printhull(finallist,totalnumberofpoints)
 
 if __name__ == "__main__":

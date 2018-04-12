@@ -1,6 +1,7 @@
 import math
 import matplotlib.pyplot as plt
 import sys
+import heapq
 
 class StackNode:
     def __init__(self):
@@ -58,6 +59,10 @@ class Point:
         self.x=x
         self.y=y
         self.id=-1
+        self.cost=99999999999999
+        self.previous=-1
+    def __lt__(self,other):
+        return self.cost<other.cost
 
 #listnode of the edge
 class edgelistnode:
@@ -65,6 +70,13 @@ class edgelistnode:
         self.u = u
         self.v = v
         self.weight=0
+
+class hashlist:
+        def __init__(self):
+            self.hl=[]
+            self.hl.append(None)
+        def add(self,p):
+            self.hl.append(p)
 
 class Solution:
     #p is the point (Class Point )
@@ -386,7 +398,7 @@ class Solution:
                     else:
                         pass
 
-    def printhull(self, morethanonehullcreated,number):
+    def printhull(self, morethanonehullcreated,number,H):
         global discardednodes
         totallist = list()
         for i in range(len(morethanonehullcreated)):
@@ -414,15 +426,18 @@ class Solution:
                     self.checklist[temp[j].id][temp[0].id] = 1
                     self.checklist[temp[0].id][temp[j].id] = 1
                 self.edgelist.append(nodeforedgelist)
-            plt.fill(Xcoord, Ycoord,c='grey')
-            plt.scatter(Xcoord, Ycoord, c='black')
+            plt.fill(Xcoord, Ycoord,c='black')
+            plt.scatter(Xcoord, Ycoord, c='yellow')
+
 
         print("Enter the source and the sink vertex and be carefull that the vertex should be outside the polygon (space separated 4 integers)")
         x1, y1, x2, y2 = map(float, input().split())
         source = Point(x1, y1)
         source.id=0
+        H.hl[0]=source
         sink = Point(x2, y2)
         sink.id=number+1
+        H.add(sink)
         checksource = self.checkinsidepolygon(source, totallist)
         checksink = self.checkinsidepolygon(sink, totallist)
 
@@ -441,7 +456,7 @@ class Solution:
         Xcoordnew.append(x2)
         Ycoordnew.append(y1)
         Ycoordnew.append(y2)
-        plt.scatter(Xcoordnew, Ycoordnew, c='black')
+        plt.scatter(Xcoordnew, Ycoordnew, c='red')
         self.findedges(totallist, sink)
         self.drawedges(source, sink, totallist)
         for i in range(len(self.edgelist)):
@@ -451,12 +466,55 @@ class Solution:
             edgelistx.append(self.edgelist[i].v.x)
             edgelisty.append(self.edgelist[i].u.y)
             edgelisty.append(self.edgelist[i].v.y)
-            plt.plot(edgelistx, edgelisty, c='black')
+            plt.plot(edgelistx, edgelisty, c='grey')
             print((self.edgelist[i].u.x, self.edgelist[i].u.y, self.edgelist[i].v.x, self.edgelist[i].v.y))
             #print((self.edgelist[i].u.id, self.edgelist[i].u.id, self.edgelist[i].v.id, self.edgelist[i].v.id))
+        dest=self.dijsktra(number+2,H)
+        route=[]
+        route.append(H.hl[dest.id])
+        while(dest.id!=0):
+            dest=H.hl[dest.previous]
+            route.append(H.hl[dest.id])
+        shortestx = list()
+        shortesty = list()
+        for i in range(len(route)):
+            shortestx.append(route[i].x)
+            shortesty.append(route[i].y)
+            print(route[i].x,route[i].y)
+        plt.plot(shortestx,shortesty,c='cyan')
         plt.show()
 
+
+    def dijsktra(self,totalnumberofpoints,H):
+        adj_list=[0]*totalnumberofpoints                            #making adjacency list
+        wt_list=[0]*totalnumberofpoints
+        for i in range(totalnumberofpoints):
+            adj_list[i]=[]
+            wt_list[i]=[]
+        for i in range(len(self.edgelist)):
+            adj_list[self.edgelist[i].u.id].append(self.edgelist[i].v.id)
+            wt_list[self.edgelist[i].u.id].append(self.edgelist[i].weight)
+            adj_list[self.edgelist[i].v.id].append(self.edgelist[i].u.id)
+            wt_list[self.edgelist[i].v.id].append(self.edgelist[i].weight)
+        H.hl[0].cost=0                                        #source cost =0
+        H.hl[0].previous=0
+        graph_nodes=[0]*totalnumberofpoints
+        for i in range(totalnumberofpoints):
+            graph_nodes[i]=H.hl[i]
+        heapq.heapify(graph_nodes)
+        while len(graph_nodes)>0:
+            sor=heapq.heappop(graph_nodes)
+            if sor.id==totalnumberofpoints-1:
+                break
+            for v in range(len(adj_list[sor.id])):
+                if H.hl[adj_list[sor.id][v]].cost > H.hl[sor.id].cost+wt_list[sor.id][v]:
+                    H.hl[adj_list[sor.id][v]].cost=H.hl[sor.id].cost+wt_list[sor.id][v]
+                    H.hl[adj_list[sor.id][v]].previous=sor.id
+            heapq.heapify(graph_nodes)
+        return sor
+
 def main():
+    H=hashlist()
     print("Enter the number of polygons")
     number = int(input())
     finallist = list()
@@ -473,6 +531,7 @@ def main():
             x,y=map(float,input().split(","))
             pointnode=Point(x,y)
             pointnode.id=idofpoint+i
+            H.add(pointnode)
             discardednodes.append(pointnode)
             p.append(pointnode)
         temp = s.ConvexHull(p,n)
@@ -486,10 +545,9 @@ def main():
         plt.plot(discardedx, discardedy, c='yellow')
         totalnumberofpoints += n
         finallist.append(temp)
-        discardednodes=list()
         s = Solution()
     s.checklist=[ [ 0 for i in range(totalnumberofpoints+2) ]for j in range(totalnumberofpoints+2)]
-    s.printhull(finallist,totalnumberofpoints)
+    s.printhull(finallist,totalnumberofpoints,H)
 
 if __name__ == "__main__":
     main()

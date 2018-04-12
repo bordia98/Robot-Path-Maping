@@ -3,57 +3,6 @@ import matplotlib.pyplot as plt
 import sys
 import heapq
 
-class StackNode:
-    def __init__(self):
-        self.data=None
-        self.next=None
-
-class Stack:
-    def __init__(self):
-        self.head=None
-
-    def push(self,x):
-        new_node=StackNode()
-        new_node.data=x
-        new_node.next=self.head
-        self.head=new_node
-
-    def nextToTop(self,x):
-        p=x.top()
-        x.pop()
-        res=x.top()
-        x.push(p)
-        return res
-
-    def pop(self):
-        if self.head is None:
-            print("stack is empty ")
-            return
-        t=self.head.data
-        self.head=self.head.next
-        return t
-
-    def top(self):
-        if self.head is None:
-            print("Empty stack")
-            return
-        t=self.head.data
-        return t
-
-    def isEmpty(self):
-        if self.head is None:
-            return True
-        else:
-            return False
-
-    def printstack(self):
-        temp=self.head
-        if temp is None:
-            return
-        while temp!=None:
-            print(temp.data)
-            temp=temp.next
-
 class Point:
     def __init__(self,x,y):
         self.x=x
@@ -215,20 +164,15 @@ class Solution:
         dup.append(p0)
         for i in range(len(points)):
             dup.append(points[i])
-        stack=Stack()
-        stack.push(dup[0])
-        stack.push(dup[1])
-        stack.push(dup[2])
+        stack=list()
+        stack.append(dup[0])
+        stack.append(dup[1])
+        stack.append(dup[2])
         for i in range(3,len(dup)):
-            while self.orientation(stack.nextToTop(stack),stack.top(),dup[i])!=2:
-                nodegot = stack.pop()
-            stack.push(dup[i])
-        lis=[]
-        while not stack.isEmpty():
-            sp=stack.top()
-            lis.append(sp)
-            stack.pop()
-
+            while self.orientation(stack[-2],stack[-1],dup[i])!=2:
+                stack.pop()
+            stack.append(dup[i])
+        lis=stack[::-1]
         return lis
 
     #Will do the documentation later after i finish all of these functions

@@ -16,33 +16,37 @@
       <file leaf-file-name="convexhull_grahmscan.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/convexhull_grahmscan.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="962">
-              <caret line="536" column="50" lean-forward="true" selection-start-line="536" selection-start-column="50" selection-end-line="536" selection-end-column="50" />
+            <state relative-caret-position="-192">
+              <caret line="29" column="15" lean-forward="false" selection-start-line="29" selection-start-column="15" selection-end-line="29" selection-end-column="15" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
-                <element signature="e#90#155#0" expanded="false" />
-                <element signature="e#174#1088#0" expanded="false" />
-                <element signature="e#1107#1305#0" expanded="false" />
-                <element signature="e#1353#1436#0" expanded="false" />
-                <element signature="e#1462#1592#0" expanded="false" />
-                <element signature="e#1677#1731#0" expanded="false" />
-                <element signature="e#1838#1948#0" expanded="false" />
-                <element signature="e#1991#2402#0" expanded="false" />
-                <element signature="e#2470#2907#0" expanded="false" />
-                <element signature="e#2975#4349#0" expanded="false" />
-                <element signature="e#4383#4416#0" expanded="false" />
-                <element signature="e#7213#7508#0" expanded="false" />
-                <element signature="e#7578#9799#0" expanded="false" />
-                <element signature="e#9849#11140#0" expanded="false" />
-                <element signature="e#11209#11833#0" expanded="false" />
-                <element signature="e#11894#12844#0" expanded="false" />
-                <element signature="e#12901#14119#0" expanded="false" />
+                <element signature="e#86#284#0" expanded="false" />
+                <element signature="e#332#415#0" expanded="false" />
+                <element signature="e#441#571#0" expanded="false" />
+                <element signature="e#593#17961#0" expanded="false" />
+                <element signature="e#656#710#0" expanded="false" />
+                <element signature="e#817#927#0" expanded="false" />
+                <element signature="e#970#1381#0" expanded="false" />
+                <element signature="e#1449#1886#0" expanded="false" />
+                <element signature="e#1954#3328#0" expanded="false" />
+                <element signature="e#3362#3395#0" expanded="false" />
+                <element signature="e#6069#6364#0" expanded="false" />
+                <element signature="e#6434#8655#0" expanded="false" />
+                <element signature="e#8705#9996#0" expanded="false" />
+                <element signature="e#10065#10689#0" expanded="false" />
+                <element signature="e#10750#11700#0" expanded="false" />
+                <element signature="e#11757#12975#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>stack</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -149,12 +153,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/convexhull_grahmscan.py</url>
-          <line>10</line>
-        </line-breakpoint>
-      </breakpoints>
       <option name="time" value="1" />
     </breakpoint-manager>
     <watches-manager />
@@ -162,27 +160,26 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/convexhull_grahmscan.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="962">
-          <caret line="536" column="50" lean-forward="true" selection-start-line="536" selection-start-column="50" selection-end-line="536" selection-end-column="50" />
+        <state relative-caret-position="-192">
+          <caret line="29" column="15" lean-forward="false" selection-start-line="29" selection-start-column="15" selection-end-line="29" selection-end-column="15" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
-            <element signature="e#90#155#0" expanded="false" />
-            <element signature="e#174#1088#0" expanded="false" />
-            <element signature="e#1107#1305#0" expanded="false" />
-            <element signature="e#1353#1436#0" expanded="false" />
-            <element signature="e#1462#1592#0" expanded="false" />
-            <element signature="e#1677#1731#0" expanded="false" />
-            <element signature="e#1838#1948#0" expanded="false" />
-            <element signature="e#1991#2402#0" expanded="false" />
-            <element signature="e#2470#2907#0" expanded="false" />
-            <element signature="e#2975#4349#0" expanded="false" />
-            <element signature="e#4383#4416#0" expanded="false" />
-            <element signature="e#7213#7508#0" expanded="false" />
-            <element signature="e#7578#9799#0" expanded="false" />
-            <element signature="e#9849#11140#0" expanded="false" />
-            <element signature="e#11209#11833#0" expanded="false" />
-            <element signature="e#11894#12844#0" expanded="false" />
-            <element signature="e#12901#14119#0" expanded="false" />
+            <element signature="e#86#284#0" expanded="false" />
+            <element signature="e#332#415#0" expanded="false" />
+            <element signature="e#441#571#0" expanded="false" />
+            <element signature="e#593#17961#0" expanded="false" />
+            <element signature="e#656#710#0" expanded="false" />
+            <element signature="e#817#927#0" expanded="false" />
+            <element signature="e#970#1381#0" expanded="false" />
+            <element signature="e#1449#1886#0" expanded="false" />
+            <element signature="e#1954#3328#0" expanded="false" />
+            <element signature="e#3362#3395#0" expanded="false" />
+            <element signature="e#6069#6364#0" expanded="false" />
+            <element signature="e#6434#8655#0" expanded="false" />
+            <element signature="e#8705#9996#0" expanded="false" />
+            <element signature="e#10065#10689#0" expanded="false" />
+            <element signature="e#10750#11700#0" expanded="false" />
+            <element signature="e#11757#12975#0" expanded="false" />
           </folding>
         </state>
       </provider>

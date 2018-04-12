@@ -5,20 +5,20 @@ import heapq
 
 class Point:
     def __init__(self,x,y):
-        self.x=x
-        self.y=y
-        self.id=-1
-        self.cost=99999999999999
-        self.previous=-1
-    def __lt__(self,other):
+        self.x=x                    #to store the x coordinate of the point
+        self.y=y                    #to store the y coordinate of the point
+        self.id=-1                  #for assiging id to each node
+        self.cost=99999999999999    #assigning the cost as inifinity
+        self.previous=-1            #pointer for the previous node
+
+    def __lt__(self,other):         #parameter for adding the nodes to heap queue
         return self.cost<other.cost
 
-#listnode of the edge
 class edgelistnode:
     def __init__(self,u,v):
-        self.u = u
-        self.v = v
-        self.weight=0
+        self.u = u                  #first vertex
+        self.v = v                  #second vertex
+        self.weight=0               #weight edge between the vertex
 
 class hashlist:
         def __init__(self):
@@ -175,8 +175,8 @@ class Solution:
         lis=stack[::-1]
         return lis
 
-    #Will do the documentation later after i finish all of these functions
-
+    #checking if the points are collinear then check whether they are on the segement or not
+    #  inorder to check intersection of lines
     def onsegment(self, firstpoint, secondpoint, thirdpoint):
         if (secondpoint.x <= max(firstpoint.x, thirdpoint.x) and secondpoint.x >= min(firstpoint.x, thirdpoint.x)) and (
                 secondpoint.y <= max(firstpoint.y, thirdpoint.y) and secondpoint.y >= min(firstpoint.y, thirdpoint.y)):
@@ -184,14 +184,10 @@ class Solution:
         else:
             return False
 
+    #function to check whether edge is possible or not
     def checkifedge(self,firstpoint,secondpoint,totallist):
-        x1=firstpoint.x
-        y1=firstpoint.y
-        x2=secondpoint.x
-        y2=secondpoint.y
-        flage=1
-        for i in range(len(totallist)):
-            for j in range(len(totallist[i])):
+        for i in range(len(totallist)):                     #for each polygon
+            for j in range(len(totallist[i])):              #for each edge in that polygon
                 if j!=len(totallist[i])-1:
                     otherfirst = totallist[i][j]
                     othersecond = totallist[i][j+1]
@@ -203,6 +199,10 @@ class Solution:
                 otherfirsty=otherfirst.y
                 othersecondx = othersecond.x
                 othersecondy=othersecond.y
+
+                #checking if the point are not the same becoz if they are same point then always they will intersect
+                # and the function will return True
+
                 if otherfirstx==firstpoint.x and otherfirsty==firstpoint.y:
                     pass
                 elif otherfirstx==secondpoint.x and otherfirsty==secondpoint.y:
@@ -212,14 +212,18 @@ class Solution:
                 elif othersecondx==secondpoint.x and othersecondy==secondpoint.y:
                     pass
                 else :
+                    #finding the orientation of the points with respect to each other in order to checkintersection
                     o1=self.orientation(firstpoint,secondpoint,otherfirst)
                     o2=self.orientation(firstpoint,secondpoint,othersecond)
                     o3=self.orientation(otherfirst,othersecond,firstpoint)
                     o4=self.orientation(otherfirst,othersecond,secondpoint)
 
-                    if o1!=o2 and o3!=o4:
+                    if o1!=o2 and o3!=o4:           #if not same then intersect
                         flage=0
                         return True
+
+                    #if the points are collinear then we need to check they lie on same line segement or not
+                    #if they lie on same segment return True else return false
                     if o1==0 and self.onsegment(firstpoint,otherfirst,secondpoint):
                         flage=0
                         return True
@@ -232,30 +236,25 @@ class Solution:
                     if o4==0 and self.onsegment(otherfirst,secondpoint,othersecond):
                         flage=0
                         return True
-            if flage==0:
-                break
-        if flage==0:
-            return True
-        else:
-            return False
+        return False
 
     def findedges(self,totallist,sink):
         for i in range(len(totallist)):
-            pointstocheck = list()
-            currentpolygonpoints = list()
+            pointstocheck = list()                              #carrying list of other vertex
+            currentpolygonpoints = list()                       #list of vertex of same polygon
             for j in range(len(totallist)):
                 for k in range(len(totallist[j])):
                     if i!=j:
                         pointstocheck.append(totallist[j][k])
                     else:
                         currentpolygonpoints.append(totallist[j][k])
-            pointstocheck.append(sink)
+            pointstocheck.append(sink)                         #adding sink vertex also
             for j in range(len(currentpolygonpoints)):
                 for k in range(len(pointstocheck)):
                     var = self.checkifedge(currentpolygonpoints[j],pointstocheck[k],totallist)
                     flag = 0
                     if var == False:
-                        if self.checklist[currentpolygonpoints[j].id][pointstocheck[k].id]==0:
+                        if self.checklist[currentpolygonpoints[j].id][pointstocheck[k].id]==0:  #checking whether previously is there an edge between these two points or not if not then add edges else pass
                             self.checklist[currentpolygonpoints[j].id][pointstocheck[k].id]=1
                             self.checklist[pointstocheck[k].id][currentpolygonpoints[j].id]=1
                             tempnode = edgelistnode(currentpolygonpoints[j], pointstocheck[k])
@@ -265,6 +264,7 @@ class Solution:
                         pass
 
     def dointersect(self,point1,point2,vertex,checkpoint):
+        #function to check the intersection of the line segments
         o1=self.orientation(point1,point2,vertex)
         o2=self.orientation(point1,point2,checkpoint)
         o3=self.orientation(vertex,checkpoint,point1)
@@ -284,8 +284,9 @@ class Solution:
         return False
 
     def checkinsidepolygon(self,vertex,totallist):
+        #function to check whether the source and sink lie inside the polygons formed or not
         flag = 0
-        for i in range(len(totallist)):
+        for i in range(len(totallist)):         #iterating all the polygons which are formed
             checkpoint=Point(sys.maxsize,vertex.y)
             count=0
             for j in range(len(totallist[i])):
@@ -314,6 +315,7 @@ class Solution:
         else:
             return False
 
+    #same as find edge function but specially written for the source vertex
     def drawedges(self,source,sink,totallist):
         for i in range(len(totallist)):
             pointstocheck = list()
@@ -339,7 +341,6 @@ class Solution:
                         pass
 
     def printhull(self, morethanonehullcreated,number,H,file):
-        global discardednodes
         totallist = list()
         for i in range(len(morethanonehullcreated)):
             Xcoord = list()

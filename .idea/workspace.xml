@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8b7a3a2e-a174-4000-8498-5b0b660eb4d8" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/map1.txt" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/map2.txt" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/map3.txt" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/convexhull_grahmscan.py" afterPath="$PROJECT_DIR$/convexhull_grahmscan.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,26 +16,19 @@
       <file leaf-file-name="convexhull_grahmscan.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/convexhull_grahmscan.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="409" column="55" lean-forward="false" selection-start-line="409" selection-start-column="55" selection-end-line="409" selection-end-column="55" />
+            <state relative-caret-position="253">
+              <caret line="397" column="19" lean-forward="false" selection-start-line="397" selection-start-column="19" selection-end-line="397" selection-end-column="19" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
-                <element signature="e#86#284#0" expanded="false" />
-                <element signature="e#332#415#0" expanded="false" />
-                <element signature="e#441#571#0" expanded="false" />
-                <element signature="e#656#710#0" expanded="false" />
-                <element signature="e#817#927#0" expanded="false" />
-                <element signature="e#970#1381#0" expanded="false" />
-                <element signature="e#1449#1886#0" expanded="false" />
-                <element signature="e#1954#3328#0" expanded="false" />
-                <element signature="e#3362#3395#0" expanded="false" />
-                <element signature="e#3440#5921#0" expanded="false" />
-                <element signature="e#6069#6364#0" expanded="false" />
-                <element signature="e#6434#8655#0" expanded="false" />
-                <element signature="e#8705#9996#0" expanded="false" />
-                <element signature="e#10065#10689#0" expanded="false" />
-                <element signature="e#10750#11700#0" expanded="false" />
-                <element signature="e#11757#12975#0" expanded="false" />
+                <element signature="e#86#582#0" expanded="false" />
+                <element signature="e#608#800#0" expanded="false" />
+                <element signature="e#1041#1095#0" expanded="false" />
+                <element signature="e#1202#1312#0" expanded="false" />
+                <element signature="e#1355#1766#0" expanded="false" />
+                <element signature="e#1834#2271#0" expanded="false" />
+                <element signature="e#2339#3713#0" expanded="false" />
+                <element signature="e#3747#3780#0" expanded="false" />
+                <element signature="e#3825#6306#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -198,7 +187,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <option name="time" value="2" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -237,26 +226,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/convexhull_grahmscan.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="409" column="55" lean-forward="false" selection-start-line="409" selection-start-column="55" selection-end-line="409" selection-end-column="55" />
+        <state relative-caret-position="253">
+          <caret line="397" column="19" lean-forward="false" selection-start-line="397" selection-start-column="19" selection-end-line="397" selection-end-column="19" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
-            <element signature="e#86#284#0" expanded="false" />
-            <element signature="e#332#415#0" expanded="false" />
-            <element signature="e#441#571#0" expanded="false" />
-            <element signature="e#656#710#0" expanded="false" />
-            <element signature="e#817#927#0" expanded="false" />
-            <element signature="e#970#1381#0" expanded="false" />
-            <element signature="e#1449#1886#0" expanded="false" />
-            <element signature="e#1954#3328#0" expanded="false" />
-            <element signature="e#3362#3395#0" expanded="false" />
-            <element signature="e#3440#5921#0" expanded="false" />
-            <element signature="e#6069#6364#0" expanded="false" />
-            <element signature="e#6434#8655#0" expanded="false" />
-            <element signature="e#8705#9996#0" expanded="false" />
-            <element signature="e#10065#10689#0" expanded="false" />
-            <element signature="e#10750#11700#0" expanded="false" />
-            <element signature="e#11757#12975#0" expanded="false" />
+            <element signature="e#86#582#0" expanded="false" />
+            <element signature="e#608#800#0" expanded="false" />
+            <element signature="e#1041#1095#0" expanded="false" />
+            <element signature="e#1202#1312#0" expanded="false" />
+            <element signature="e#1355#1766#0" expanded="false" />
+            <element signature="e#1834#2271#0" expanded="false" />
+            <element signature="e#2339#3713#0" expanded="false" />
+            <element signature="e#3747#3780#0" expanded="false" />
+            <element signature="e#3825#6306#0" expanded="false" />
           </folding>
         </state>
       </provider>

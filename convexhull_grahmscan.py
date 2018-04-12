@@ -227,10 +227,6 @@ class Solution:
         while not stack.isEmpty():
             sp=stack.top()
             lis.append(sp)
-            print("(",end="")
-            print(sp.x,end=",")
-            print(sp.y,end=")")
-            print()
             stack.pop()
 
         return lis
@@ -405,6 +401,7 @@ class Solution:
             Xcoord = list()
             Ycoord = list()
             temp = list()
+            print("The end point of the convex hull formed by",i+1,"Polygon are ")
             for j in range(len(morethanonehullcreated[i])):
                 print("(", morethanonehullcreated[i][j].x, ",", morethanonehullcreated[i][j].y, ")")
                 node = morethanonehullcreated[i][j]
@@ -427,7 +424,7 @@ class Solution:
                     self.checklist[temp[0].id][temp[j].id] = 1
                 self.edgelist.append(nodeforedgelist)
             plt.fill(Xcoord, Ycoord,c='black')
-            plt.scatter(Xcoord, Ycoord, c='yellow')
+            plt.scatter(Xcoord, Ycoord, c='magenta')
 
 
         print("Enter the source and the sink vertex and be carefull that the vertex should be outside the polygon (space separated 4 integers)")
@@ -467,8 +464,6 @@ class Solution:
             edgelisty.append(self.edgelist[i].u.y)
             edgelisty.append(self.edgelist[i].v.y)
             plt.plot(edgelistx, edgelisty, c='grey')
-            print((self.edgelist[i].u.x, self.edgelist[i].u.y, self.edgelist[i].v.x, self.edgelist[i].v.y))
-            #print((self.edgelist[i].u.id, self.edgelist[i].u.id, self.edgelist[i].v.id, self.edgelist[i].v.id))
         dest=self.dijsktra(number+2,H)
         route=[]
         route.append(H.hl[dest.id])

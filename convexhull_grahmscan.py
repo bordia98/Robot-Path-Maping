@@ -338,7 +338,7 @@ class Solution:
                     else:
                         pass
 
-    def printhull(self, morethanonehullcreated,number,H):
+    def printhull(self, morethanonehullcreated,number,H,file):
         global discardednodes
         totallist = list()
         for i in range(len(morethanonehullcreated)):
@@ -367,12 +367,12 @@ class Solution:
                     self.checklist[temp[j].id][temp[0].id] = 1
                     self.checklist[temp[0].id][temp[j].id] = 1
                 self.edgelist.append(nodeforedgelist)
-            plt.fill(Xcoord, Ycoord,c='black')
-            plt.scatter(Xcoord, Ycoord, c='magenta')
+            plt.fill(Xcoord, Ycoord,c='olive')
+            plt.scatter(Xcoord, Ycoord, c='black')
 
 
         print("Enter the source and the sink vertex and be carefull that the vertex should be outside the polygon (space separated 4 integers)")
-        x1, y1, x2, y2 = map(float, input().split())
+        x1, y1, x2, y2 = map(float, file.readline().split(" "))
         source = Point(x1, y1)
         source.id=0
         H.hl[0]=source
@@ -400,14 +400,14 @@ class Solution:
         plt.scatter(Xcoordnew, Ycoordnew, c='red')
         self.findedges(totallist, sink)
         self.drawedges(source, sink, totallist)
-        for i in range(len(self.edgelist)):
+        '''for i in range(len(self.edgelist)):
             edgelistx = list()
             edgelisty = list()
             edgelistx.append(self.edgelist[i].u.x)
             edgelistx.append(self.edgelist[i].v.x)
             edgelisty.append(self.edgelist[i].u.y)
             edgelisty.append(self.edgelist[i].v.y)
-            plt.plot(edgelistx, edgelisty, c='grey')
+            plt.plot(edgelistx, edgelisty, c='grey')'''
         dest=self.dijsktra(number+2,H)
         route=[]
         route.append(H.hl[dest.id])
@@ -454,20 +454,27 @@ class Solution:
 
 def main():
     H=hashlist()
+    print("Enter the map that you want to chose")
+    mapused = input()
+    try:
+        file = open(mapused, 'r')
+    except Exception:
+        print("File not found")
+        sys.exit(0)
     print("Enter the number of polygons")
-    number = int(input())
+    number=int(file.readline())
     finallist = list()
     totalnumberofpoints=0
     s = Solution()
     for t in range(number):
         p=list()                                        #defining a empty list of points
         print("Give the no of points")
-        n=int(input())
+        n=int(file.readline())
         print("Enter points")
         idofpoint=totalnumberofpoints+1
         discardednodes=list()
         for i in range(n):
-            x,y=map(float,input().split(","))
+            x,y=map(float,file.readline().split(","))
             pointnode=Point(x,y)
             pointnode.id=idofpoint+i
             H.add(pointnode)
@@ -481,12 +488,12 @@ def main():
             discardedy.append(discardednodes[i].y)
         discardedx.append(discardednodes[0].x)
         discardedy.append(discardednodes[0].y)
-        plt.plot(discardedx, discardedy, c='yellow')
+        plt.plot(discardedx, discardedy, c='blue')
         totalnumberofpoints += n
         finallist.append(temp)
         s = Solution()
     s.checklist=[ [ 0 for i in range(totalnumberofpoints+2) ]for j in range(totalnumberofpoints+2)]
-    s.printhull(finallist,totalnumberofpoints,H)
+    s.printhull(finallist,totalnumberofpoints,H,file)
 
 if __name__ == "__main__":
     main()
